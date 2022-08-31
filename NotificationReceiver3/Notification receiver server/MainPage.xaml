@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="NotificationReceiver3.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NotificationReceiver3"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="MainPageObject"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="auto" HorizontalAlignment="Stretch">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Row="0" Name="HeaderListView" Height="auto" IsItemClickEnabled="False" HorizontalAlignment="Left">
+            <ListViewItem IsHitTestVisible="False">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock TextAlignment="Center" Width="200">App</TextBlock>
+                    <TextBlock TextAlignment="Center" Width="250">Title</TextBlock>
+                    <TextBlock TextAlignment="Center" Width="350">Text</TextBlock>
+                </StackPanel>
+            </ListViewItem>
+        </ListView>
+        <ScrollViewer Grid.Row="1" HorizontalAlignment="Left" Name="NotificationsScrollViewer">
+            <ListView x:Name="NotificationsListView" ItemsSource="{x:Bind NotificationContainer}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:MyNotification">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock TextAlignment="Center" Width="200" Text="{x:Bind NotificationSender}"/>
+                            <TextBlock TextAlignment="Center" Width="250" Text="{x:Bind NotificationTitle}"/>
+                            <TextBlock TextAlignment="Center" Width="350" Text="{x:Bind NotificationContents}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+        <Button Grid.Row="1" Grid.Column="1">Clear</Button>
+    </Grid>
+</Page>
